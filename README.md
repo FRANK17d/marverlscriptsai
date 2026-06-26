@@ -25,6 +25,12 @@ La app llama a `POST /api/generate-script` desde el backend Node. Si no hay clav
 
 Modelo por defecto: `openrouter/free`. Si quieres fijar un modelo gratis concreto, cambia `OPENROUTER_MODEL` en `.env`, por ejemplo `qwen/qwen3-coder:free` si aparece disponible en OpenRouter.
 
+## Vercel
+
+El despliegue usa las funciones serverless de `api/` para exponer `POST /api/generate-script` y `GET /api/health`. Configura `OPENROUTER_API_KEY` en las variables de entorno de Vercel; `OPENROUTER_MODEL` y `APP_URL` son opcionales.
+
+En produccion la app intenta usar la API de IA automaticamente. Si el endpoint no esta configurado o falla, usa el generador local de respaldo.
+
 ## Incluye
 
 - Selector de personajes.

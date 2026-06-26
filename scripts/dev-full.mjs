@@ -1,11 +1,10 @@
 import { spawn } from "node:child_process";
 
-const useShell = process.platform === "win32";
+const npmCommand = process.platform === "win32" ? "npm.cmd" : "npm";
 
 function runNpmScript(scriptName, extraEnv = {}) {
-  return spawn("npm", ["run", scriptName], {
+  return spawn(npmCommand, ["run", scriptName], {
     env: { ...process.env, ...extraEnv },
-    shell: useShell,
     stdio: "inherit",
   });
 }

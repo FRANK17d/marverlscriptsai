@@ -60,7 +60,7 @@ const socialPlatforms = [
 ];
 
 const sceneCounts  = { Corto:2, Medio:3, Largo:5 };
-const aiApiEnabled = import.meta.env.VITE_AI_API_ENABLED === "true";
+const aiApiEnabled = import.meta.env.PROD || import.meta.env.VITE_AI_API_ENABLED === "true";
 
 /* ─────────────────────────────────────────────
    SCRIPT BUILDER
@@ -475,7 +475,7 @@ export default function App() {
       <div className="scroll-progress" style={{ transform:`scaleX(${scrollProgress})` }} aria-hidden="true" />
 
       {/* ── FLOATING NAVBAR ─────────────────── */}
-      <header className={`navbar${scrolled?" scrolled":""}`} role="banner">
+      <header className={`navbar${scrolled?" scrolled":""}`}>
         <div className="navbar-inner">
 
           <a className="navbar-logo" href="#hero" aria-label="Marvel Scripts AI">
@@ -497,6 +497,7 @@ export default function App() {
           <div className="navbar-actions">
             <button
               className="theme-toggle"
+              type="button"
               onClick={() => setDarkMode((d)=>!d)}
               aria-label={darkMode ? "Modo claro" : "Modo oscuro"}
             >
@@ -546,7 +547,15 @@ export default function App() {
         {/* ── HERO ──────────────────────────── */}
         <section className="hero-section" id="hero" aria-labelledby="hero-title">
           <div className="hero-bg" aria-hidden="true">
-            <img className="hero-bg-image" src="/hero.jpg" alt="" style={heroImgStyle} loading="eager" decoding="async" />
+            <img
+              className="hero-bg-image"
+              src="/hero.jpg"
+              alt=""
+              style={heroImgStyle}
+              loading="eager"
+              fetchPriority="high"
+              decoding="async"
+            />
             <div className="hero-bg-overlay" />
           </div>
           <div className="hero-accent-bar" aria-hidden="true" />
